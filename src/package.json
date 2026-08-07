@@ -1,0 +1,23 @@
+{
+  "name": "chainguard-ai",
+  "version": "1.0.0",
+  "description": "AI-powered on-chain intelligence miner for wallet risk analysis",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "tsx src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "express": "latest",
+    "dotenv": "latest",
+    "viem": "latest",
+    "openai": "latest"
+  },
+  "devDependencies": {
+    "typescript": "latest",
+    "tsx": "latest",
+    "@types/node": "latest",
+    "@types/express": "latest"
+  }
+}
