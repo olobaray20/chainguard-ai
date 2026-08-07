@@ -6,7 +6,9 @@ dotenv.config();
 const app = express();
 
 app.use(express.json());
+import walletRouter from "./api/wallet";
 
+app.use("/api", walletRouter);
 const PORT = process.env.PORT || 3000;
 
 app.get("/", (_req, res) => {
