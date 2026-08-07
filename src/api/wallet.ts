@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { getWalletBalance } from "../blockchain/base";
 import { calculateRiskScore } from "../risk-engine/risk";
+import { generateAIExplanation } from "../ai/analysis";
 
 const router = Router();
 
@@ -18,11 +19,14 @@ router.post("/analyze_wallet_risk", async (req, res) => {
 
     const riskAnalysis = calculateRiskScore(walletData);
 
+    const aiExplanation = generateAIExplanation(riskAnalysis);
+
     res.json({
       wallet_address,
       blockchain_data: walletData,
       ...riskAnalysis,
-      summary: "Wallet risk analysis completed"
+      ai_analysis: aiExplanation,
+      summary: "ChainGuard AI wallet risk analysis completed"
     });
 
   } catch (error) {
