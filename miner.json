@@ -1,0 +1,20 @@
+{
+  "name": "ChainGuard AI",
+  "description": "AI-powered on-chain intelligence miner that analyzes wallet behavior and provides evidence-backed risk assessments.",
+  "version": "1.0.0",
+  "category": "On-chain Analytics",
+  "input": {
+    "type": "wallet_address",
+    "description": "Blockchain wallet address to analyze"
+  },
+  "output": {
+    "type": "risk_intelligence",
+    "fields": [
+      "risk_score",
+      "risk_level",
+      "findings",
+      "ai_analysis",
+      "confidence"
+    ]
+  }
+}
