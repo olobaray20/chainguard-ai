@@ -1,25 +1,35 @@
 import { Router } from "express";
+import { getWalletBalance } from "../blockchain/base";
+import { calculateRiskScore } from "../risk-engine/risk";
 
 const router = Router();
 
 router.post("/analyze_wallet_risk", async (req, res) => {
-  const { wallet_address } = req.body;
+  try {
+    const { wallet_address } = req.body;
 
-  if (!wallet_address) {
-    return res.status(400).json({
-      error: "Wallet address is required"
+    if (!wallet_address) {
+      return res.status(400).json({
+        error: "Wallet address is required"
+      });
+    }
+
+    const walletData = await getWalletBalance(wallet_address);
+
+    const riskAnalysis = calculateRiskScore(walletData);
+
+    res.json({
+      wallet_address,
+      blockchain_data: walletData,
+      ...riskAnalysis,
+      summary: "Wallet risk analysis completed"
+    });
+
+  } catch (error) {
+    res.status(500).json({
+      error: "Failed to analyze wallet"
     });
   }
-
-  res.json({
-    wallet_address,
-    risk_score: 50,
-    risk_level: "Medium",
-    summary: "Wallet analysis endpoint is working",
-    findings: [
-      "Analysis engine connected"
-    ]
-  });
 });
 
 export default router;
